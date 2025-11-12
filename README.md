@@ -4,6 +4,7 @@ Ein robustes Python-Skript zum automatischen Erstellen von Scroll-Videos von Web
 
 ## Features
 
+### Basis-Features
 - Automatisches Scrollen durch beliebige Webseiten
 - Aufzeichnung des Scroll-Vorgangs als Video
 - Konfigurierbare Scroll-Dauer
@@ -12,6 +13,15 @@ Ein robustes Python-Skript zum automatischen Erstellen von Scroll-Videos von Web
 - Anpassbare Viewport-Größe
 - Flüssiges Scrollen mit 30 FPS
 - CLI-basierte Konfiguration
+
+### 🆕 Workflow-System (NEU!)
+- **🔍 Automatische Link-Erkennung** - Findet Links via Sitemap.xml oder Homepage-Scraping
+- **✅ Interaktive Auswahl** - Checkbox-Interface zum Auswählen von Seiten und Kategorien
+- **🔢 Nummerierte Sequenzen** - Erstellt automatisch nummerierte Video-Workflows
+- **💾 Wiederverwendbare Workflows** - Speichern und laden von Workflow-Konfigurationen
+- **🎯 Batch-Verarbeitung** - Generiert automatisch mehrere Videos in einem Durchlauf
+
+👉 **Siehe [WORKFLOW_GUIDE.md](WORKFLOW_GUIDE.md) für Details zum Workflow-System**
 
 ## Voraussetzungen
 
@@ -89,7 +99,14 @@ Dies lädt den Chromium-Browser herunter, der für die Videoaufnahme benötigt w
 
 ## Verwendung
 
-### Basis-Syntax
+Es gibt zwei Hauptmodi:
+
+1. **Einzelnes Video** - Direkte Verwendung von `scroll_video_generator.py`
+2. **Workflow-Modus** - Interaktive Erstellung von Video-Sequenzen (siehe [WORKFLOW_GUIDE.md](WORKFLOW_GUIDE.md))
+
+### Modus 1: Einzelnes Video
+
+#### Basis-Syntax
 
 ```bash
 python scroll_video_generator.py --url <URL> --duration <SEKUNDEN> --output <DATEINAME>
@@ -263,9 +280,53 @@ python scroll_video_generator.py \
 ls -lh hackernews_scroll.mp4
 ```
 
+### Modus 2: Workflow-System (NEU!)
+
+Das Workflow-System ermöglicht die Erstellung von Video-Sequenzen mit automatischer Link-Erkennung.
+
+#### Schnellstart Workflow
+
+```bash
+# 1. Interaktiven Workflow Builder starten
+python workflow_builder.py
+
+# 2. Folgen Sie den Anweisungen:
+#    - URL eingeben
+#    - Automatische Link-Erkennung (Sitemap oder Scraping)
+#    - Kategorien und Seiten per Checkbox auswählen
+#    - Video-Einstellungen konfigurieren
+#    - Workflow speichern
+
+# 3. Workflow ausführen
+python workflow_runner.py workflows/mein_workflow.json
+```
+
+#### Workflow-Features im Überblick
+
+**Automatische Link-Erkennung:**
+```bash
+# Probiert automatisch sitemap.xml
+python link_finder.py https://example.com
+```
+
+**Workflow-Info anzeigen:**
+```bash
+python workflow_runner.py workflows/mein_workflow.json --info
+```
+
+**Teilweise ausführen:**
+```bash
+# Nur Schritte 5-10
+python workflow_runner.py workflows/mein_workflow.json --start 5 --end 10
+```
+
+**Vollständige Dokumentation:**
+- Siehe [WORKFLOW_GUIDE.md](WORKFLOW_GUIDE.md) für detaillierte Anleitung
+- Umfasst: Link-Erkennung, Kategorisierung, Nummerierung, Batch-Verarbeitung
+
 ## Erweiterte Verwendung
 
-### Batch-Verarbeitung mehrerer URLs
+### Batch-Verarbeitung mehrerer URLs (Manuell)
 
 Erstellen Sie ein Bash-Skript:
 

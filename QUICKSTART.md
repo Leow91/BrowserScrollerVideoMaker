@@ -2,6 +2,8 @@
 
 Schnellanleitung zum Erstellen Ihres ersten Scroll-Videos in 5 Minuten!
 
+**Neu:** Jetzt mit Workflow-System für automatische Video-Sequenzen! 🎬
+
 ## Schritt 1: Installation (3 Minuten)
 
 ```bash
@@ -33,7 +35,35 @@ python scroll_video_generator.py \
 # Öffnen Sie es mit Ihrem Video-Player!
 ```
 
-## Nächste Schritte
+## 🆕 Workflow-Modus (Empfohlen für mehrere Videos)
+
+### Option A: Interaktiver Workflow Builder
+
+```bash
+# Starten Sie den Builder
+python workflow_builder.py
+
+# Folgen Sie den Schritten:
+# 1. URL eingeben (z.B. https://example.com)
+# 2. Link-Erkennung wählen (Sitemap empfohlen)
+# 3. Kategorien und Seiten per Checkbox auswählen
+# 4. Einstellungen konfigurieren
+# 5. Als Workflow speichern
+
+# Workflow ausführen
+python workflow_runner.py workflows/ihr_workflow.json
+```
+
+### Vorteile des Workflow-Modus:
+- ✅ Automatische Link-Erkennung
+- ✅ Checkbox-Auswahl mehrerer Seiten
+- ✅ Nummerierte Video-Sequenzen
+- ✅ Wiederverwendbare Konfiguration
+- ✅ Batch-Verarbeitung
+
+📖 **Detaillierte Anleitung:** [WORKFLOW_GUIDE.md](WORKFLOW_GUIDE.md)
+
+## Nächste Schritte (Einzelne Videos)
 
 ### Text hinzufügen
 

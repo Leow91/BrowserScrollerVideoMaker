@@ -43,5 +43,10 @@ temp_raw_scroll.webm
 *.avi
 *.mov
 
+# Workflow output
+output/
+workflows/*.json
+
 # Keep example files
 !examples/*.mp4
+!examples/example_workflow.json

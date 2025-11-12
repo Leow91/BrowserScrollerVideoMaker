@@ -1,0 +1,38 @@
+{
+  "base_url": "https://example.com",
+  "steps": [
+    {
+      "number": 1,
+      "url": "https://example.com",
+      "description": "Homepage",
+      "duration": 10,
+      "width": 1920,
+      "height": 1080,
+      "output": "001_homepage.mp4",
+      "logo_path": null,
+      "text_overlay": "Welcome to Example.com"
+    },
+    {
+      "number": 2,
+      "url": "https://example.com/about",
+      "description": "About Us",
+      "duration": 15,
+      "width": 1920,
+      "height": 1080,
+      "output": "002_about_us.mp4",
+      "logo_path": null,
+      "text_overlay": "About Us"
+    },
+    {
+      "number": 3,
+      "url": "https://example.com/products",
+      "description": "Products",
+      "duration": 20,
+      "width": 1920,
+      "height": 1080,
+      "output": "003_products.mp4",
+      "logo_path": null,
+      "text_overlay": "Our Products"
+    }
+  ]
+}
