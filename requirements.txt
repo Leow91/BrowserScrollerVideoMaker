@@ -1,0 +1,4 @@
+# Automated Web Scroll Video Creator - Dependencies
+# Install with: pip install -r requirements.txt
+
+playwright>=1.40.0
