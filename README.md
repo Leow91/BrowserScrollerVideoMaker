@@ -1,27 +1,58 @@
 # Automated Web Scroll Video Creator
 
-Ein robustes Python-Skript zum automatischen Erstellen von Scroll-Videos von Webseiten mit optionalen Logo- und Text-Overlays.
+🎬 **Production-Ready** | 🌐 **Web GUI** | 🚀 **Scalable** | 📦 **Docker Support** | ⚖️ **MIT License**
+
+Ein professionelles, produktionsreifes System zum automatischen Erstellen von Scroll-Videos von Webseiten mit Web-GUI, Workflow-Management und Enterprise-Features.
+
+## ✨ Highlights
+
+- ✅ **Modern Web GUI** - Intuitive Gradio-basierte Benutzeroberfläche
+- ✅ **Workflow-System** - Automatische Link-Erkennung und Batch-Verarbeitung
+- ✅ **Production-Ready** - Logging, Konfiguration, Error Handling
+- ✅ **Docker Support** - Einfaches Deployment mit Docker & Kubernetes
+- ✅ **Skalierbar** - Modular, erweiterbar, gut dokumentiert
+- ✅ **Kommerziell nutzbar** - MIT License, alle Dependencies kompatibel
 
 ## Features
 
-### Basis-Features
+### 🎯 Core Features
 - Automatisches Scrollen durch beliebige Webseiten
-- Aufzeichnung des Scroll-Vorgangs als Video
-- Konfigurierbare Scroll-Dauer
-- Optional: Logo-Overlay (obere rechte Ecke)
-- Optional: Text-Overlay (unten zentriert)
-- Anpassbare Viewport-Größe
-- Flüssiges Scrollen mit 30 FPS
-- CLI-basierte Konfiguration
+- Aufzeichnung des Scroll-Vorgangs als Video (30 FPS)
+- Logo-Overlay (obere rechte Ecke)
+- Text-Overlay (unten zentriert)
+- Anpassbare Viewport-Größe (640x480 bis 3840x2160)
+- Konfigurierbare Scroll-Dauer (1-300 Sekunden)
+- FFmpeg-Integration für professionelle Video-Kodierung
 
-### 🆕 Workflow-System (NEU!)
-- **🔍 Automatische Link-Erkennung** - Findet Links via Sitemap.xml oder Homepage-Scraping
-- **✅ Interaktive Auswahl** - Checkbox-Interface zum Auswählen von Seiten und Kategorien
-- **🔢 Nummerierte Sequenzen** - Erstellt automatisch nummerierte Video-Workflows
-- **💾 Wiederverwendbare Workflows** - Speichern und laden von Workflow-Konfigurationen
-- **🎯 Batch-Verarbeitung** - Generiert automatisch mehrere Videos in einem Durchlauf
+### 🌐 Web GUI
+- **Modern & Intuitiv** - Gradio-basiertes Interface
+- **Echtzeit-Feedback** - Progress-Tracking während Video-Generierung
+- **Multiple Tabs** - Single Video, Link Discovery, Workflow Builder, Runner
+- **Library Management** - Übersicht über Workflows und generierte Videos
+- **Settings Panel** - Konfiguration direkt im Browser
 
-👉 **Siehe [WORKFLOW_GUIDE.md](WORKFLOW_GUIDE.md) für Details zum Workflow-System**
+### 🔄 Workflow-System
+- **🔍 Automatische Link-Erkennung** - Sitemap.xml oder Homepage-Scraping
+- **✅ Interaktive Auswahl** - Checkbox-Interface (Web GUI & CLI)
+- **🔢 Nummerierte Sequenzen** - Automatische Nummerierung (001, 002, ...)
+- **💾 Wiederverwendbare Workflows** - JSON-basierte Konfiguration
+- **🎯 Batch-Verarbeitung** - Mehrere Videos automatisch generieren
+- **📊 Kategorisierung** - Intelligente Link-Gruppierung
+
+### 🏗️ Production Features
+- **Centralized Configuration** - Pydantic-basierte Config mit .env Support
+- **Structured Logging** - Rich-formatierte Logs mit Rotation
+- **Error Handling** - Comprehensive Exception Handling
+- **Docker Support** - Production-ready Dockerfile & docker-compose
+- **Health Checks** - Systemüberwachung und Status-Checks
+- **Resource Management** - Konfigurierbare Limits und Caching
+
+### 📚 Documentation
+- [README.md](README.md) - Hauptdokumentation (diese Datei)
+- [WORKFLOW_GUIDE.md](WORKFLOW_GUIDE.md) - Workflow-System Details
+- [DEPLOYMENT.md](DEPLOYMENT.md) - Production Deployment Guide
+- [CODE_REVIEW.md](CODE_REVIEW.md) - Code-Review & Lizenz-Analyse
+- [QUICKSTART.md](QUICKSTART.md) - 5-Minuten Quick Start
 
 ## Voraussetzungen
 
@@ -97,14 +128,90 @@ playwright install chromium
 
 Dies lädt den Chromium-Browser herunter, der für die Videoaufnahme benötigt wird.
 
+## 🚀 Quick Start
+
+### Option 1: Web GUI (Empfohlen)
+
+```bash
+# 1. Installation
+make setup
+# oder manuell:
+pip install -r requirements.txt
+playwright install chromium
+
+# 2. Web GUI starten
+make gui
+# oder:
+python web_gui.py
+```
+
+**Öffnen Sie:** http://localhost:7860
+
+### Option 2: Docker (Production)
+
+```bash
+# Start mit Docker Compose
+docker-compose up -d
+
+# Zugriff auf http://localhost:7860
+
+# Logs anzeigen
+docker-compose logs -f
+
+# Stoppen
+docker-compose down
+```
+
+### Option 3: CLI (Advanced)
+
+```bash
+# Einzelnes Video
+python scroll_video_generator.py --url https://example.com --duration 15 --output video.mp4
+
+# Workflow Builder
+python workflow_builder.py
+
+# Workflow ausführen
+python workflow_runner.py workflows/my_workflow.json
+```
+
 ## Verwendung
 
-Es gibt zwei Hauptmodi:
+### 🌐 Web GUI
 
-1. **Einzelnes Video** - Direkte Verwendung von `scroll_video_generator.py`
-2. **Workflow-Modus** - Interaktive Erstellung von Video-Sequenzen (siehe [WORKFLOW_GUIDE.md](WORKFLOW_GUIDE.md))
+Die Web GUI bietet die komfortabelste Möglichkeit, Videos zu erstellen:
 
-### Modus 1: Einzelnes Video
+**Tabs:**
+1. **📹 Single Video** - Einzelne Videos erstellen
+2. **🔍 Link Discovery** - Automatisch Links finden
+3. **⚙️ Workflow Builder** - Workflows aus Links erstellen
+4. **▶️ Workflow Runner** - Gespeicherte Workflows ausführen
+5. **📚 Library** - Workflows und Videos verwalten
+6. **⚙️ Settings** - Konfiguration anzeigen
+
+**Screenshot-Beispiele:**
+
+```
+┌──────────────────────────────────────────────┐
+│  🎬 Scroll Video Generator                  │
+├──────────────────────────────────────────────┤
+│  📹 Single Video  🔍 Discover  ⚙️ Builder    │
+├──────────────────────────────────────────────┤
+│                                              │
+│  Website URL: https://example.com            │
+│  Duration: [====15s====]                     │
+│  Width: 1920  Height: 1080                   │
+│  Logo: [Upload PNG]                          │
+│  Text: My Website Tour                       │
+│                                              │
+│  [ 🎬 Generate Video ]                       │
+│                                              │
+│  Status: ✅ Video generated!                 │
+│  [Video Player]                              │
+└──────────────────────────────────────────────┘
+```
+
+### Modus 1: Einzelnes Video (CLI)
 
 #### Basis-Syntax
 
