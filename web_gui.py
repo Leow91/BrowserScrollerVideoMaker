@@ -17,6 +17,14 @@ from config import config
 from link_finder import LinkFinder
 from scroll_video_generator import ScrollVideoGenerator
 from workflow_runner import WorkflowRunner
+from social_presets import (
+    get_platform_choices,
+    get_platform_from_display_name,
+    get_preset,
+    get_platform_info,
+    validate_duration,
+    PLATFORM_QUICK_REFERENCE,
+)
 
 
 class WebGUI:
@@ -27,9 +35,32 @@ class WebGUI:
         self.config = config
         self.current_workflow = None
 
+    def update_platform_settings(self, platform_name: str) -> Tuple[int, int, int, int, int, str]:
+        """
+        Update video settings based on selected platform.
+
+        Args:
+            platform_name: Display name of platform
+
+        Returns:
+            Tuple of (width, height, duration, min_dur, max_dur, info)
+        """
+        platform = get_platform_from_display_name(platform_name)
+        preset = get_preset(platform)
+
+        return (
+            preset.width,
+            preset.height,
+            preset.recommended_duration,
+            preset.min_duration,
+            preset.max_duration,
+            get_platform_info(platform)
+        )
+
     def generate_single_video(
         self,
         url: str,
+        platform_name: str,
         duration: int,
         width: int,
         height: int,
@@ -42,6 +73,7 @@ class WebGUI:
 
         Args:
             url: URL to scroll
+            platform_name: Selected platform display name
             duration: Duration in seconds
             width: Viewport width
             height: Viewport height
@@ -59,10 +91,18 @@ class WebGUI:
             if not url or not url.startswith(("http://", "https://")):
                 return "❌ Error: Invalid URL. Must start with http:// or https://", None
 
-            # Generate output filename
+            # Validate duration for platform
+            platform = get_platform_from_display_name(platform_name)
+            is_valid, error_msg = validate_duration(platform, duration)
+            if not is_valid:
+                return f"❌ {error_msg}", None
+
+            # Generate output filename with platform info
             from urllib.parse import urlparse
             domain = urlparse(url).netloc.replace(".", "_")
-            output_filename = f"{domain}_{duration}s.mp4"
+            preset = get_preset(platform)
+            platform_short = preset.name
+            output_filename = f"{domain}_{platform_short}_{width}x{height}_{duration}s.mp4"
             output_path = self.config.get_output_video_path(output_filename)
 
             # Get logo path if provided
@@ -373,17 +413,32 @@ class WebGUI:
                                 placeholder="https://example.com",
                                 value="https://example.com"
                             )
+
+                            # Platform selector dropdown
+                            single_platform = gr.Dropdown(
+                                choices=get_platform_choices(),
+                                value=get_platform_choices()[0],
+                                label="🎯 Social Media Platform",
+                                info="Select platform for optimized video settings"
+                            )
+
+                            # Platform info display
+                            single_platform_info = gr.Markdown(
+                                value=get_platform_info(get_platform_from_display_name(get_platform_choices()[0])),
+                                label="Platform Info"
+                            )
+
                             single_duration = gr.Slider(
-                                minimum=5,
-                                maximum=120,
+                                minimum=3,
+                                maximum=300,
                                 value=15,
                                 step=1,
                                 label="Duration (seconds)"
                             )
 
                             with gr.Row():
-                                single_width = gr.Number(label="Width", value=1920)
-                                single_height = gr.Number(label="Height", value=1080)
+                                single_width = gr.Number(label="Width", value=1920, precision=0)
+                                single_height = gr.Number(label="Height", value=1080, precision=0)
 
                             single_logo = gr.File(label="Logo (optional, PNG)", file_types=[".png"])
                             single_text = gr.Textbox(label="Text Overlay (optional)", placeholder="My Website Tour")
@@ -391,12 +446,20 @@ class WebGUI:
                             single_btn = gr.Button("🎬 Generate Video", variant="primary", size="lg")
 
                         with gr.Column():
-                            single_status = gr.Textbox(label="Status", lines=3)
+                            single_status = gr.Textbox(label="Status", lines=5)
                             single_video = gr.Video(label="Generated Video")
+
+                    # Update settings when platform changes
+                    single_platform.change(
+                        fn=self.update_platform_settings,
+                        inputs=[single_platform],
+                        outputs=[single_width, single_height, single_duration,
+                                single_duration, single_duration, single_platform_info]
+                    )
 
                     single_btn.click(
                         fn=self.generate_single_video,
-                        inputs=[single_url, single_duration, single_width, single_height, single_logo, single_text],
+                        inputs=[single_url, single_platform, single_duration, single_width, single_height, single_logo, single_text],
                         outputs=[single_status, single_video]
                     )
 
@@ -517,7 +580,13 @@ class WebGUI:
                     list_wf_btn.click(fn=self.list_workflows, outputs=[wf_list])
                     list_vid_btn.click(fn=self.list_videos, outputs=[vid_list])
 
-                # Tab 6: Settings
+                # Tab 6: Platform Reference
+                with gr.Tab("📱 Platform Guide"):
+                    gr.Markdown("### Social Media Platform Specifications")
+
+                    gr.Markdown(PLATFORM_QUICK_REFERENCE)
+
+                # Tab 7: Settings
                 with gr.Tab("⚙️ Settings"):
                     gr.Markdown("### Application Configuration")
 
@@ -536,13 +605,15 @@ class WebGUI:
                             - **FFmpeg Preset:** {self.config.ffmpeg_preset}
                             - **Browser Headless:** {self.config.browser_headless}
 
+                            **Supported Platforms:** {len(get_platform_choices())}
+
                             To modify settings, edit the `.env` file or use environment variables.
                             """)
 
             gr.Markdown(
                 """
                 ---
-                **Version:** 1.1.0 | **License:** MIT | [Documentation](https://github.com/yourusername/BrowserScrollerVideoMaker)
+                **Version:** 1.2.0 | **License:** MIT | **Platforms:** 13 Social Media Presets | [Documentation](https://github.com/yourusername/BrowserScrollerVideoMaker)
                 """
             )
 

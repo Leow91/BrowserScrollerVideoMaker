@@ -1,12 +1,13 @@
 # Automated Web Scroll Video Creator
 
-🎬 **Production-Ready** | 🌐 **Web GUI** | 🚀 **Scalable** | 📦 **Docker Support** | ⚖️ **MIT License**
+🎬 **Production-Ready** | 🌐 **Web GUI** | 📱 **13 Social Platforms** | 🚀 **Scalable** | 📦 **Docker Support** | ⚖️ **MIT License**
 
-Ein professionelles, produktionsreifes System zum automatischen Erstellen von Scroll-Videos von Webseiten mit Web-GUI, Workflow-Management und Enterprise-Features.
+Ein professionelles, produktionsreifes System zum automatischen Erstellen von Scroll-Videos von Webseiten mit Web-GUI, Workflow-Management, Social-Media-Optimierung und Enterprise-Features.
 
 ## ✨ Highlights
 
 - ✅ **Modern Web GUI** - Intuitive Gradio-basierte Benutzeroberfläche
+- ✅ **13 Social Media Presets** - Instagram, TikTok, YouTube, Facebook, LinkedIn & mehr
 - ✅ **Workflow-System** - Automatische Link-Erkennung und Batch-Verarbeitung
 - ✅ **Production-Ready** - Logging, Konfiguration, Error Handling
 - ✅ **Docker Support** - Einfaches Deployment mit Docker & Kubernetes
@@ -26,10 +27,12 @@ Ein professionelles, produktionsreifes System zum automatischen Erstellen von Sc
 
 ### 🌐 Web GUI
 - **Modern & Intuitiv** - Gradio-basiertes Interface
+- **🆕 Platform Dropdown** - Wähle Instagram, TikTok, YouTube & mehr
+- **Auto-Konfiguration** - Einstellungen passen sich automatisch an
 - **Echtzeit-Feedback** - Progress-Tracking während Video-Generierung
-- **Multiple Tabs** - Single Video, Link Discovery, Workflow Builder, Runner
+- **7 Tabs** - Single Video, Link Discovery, Workflow Builder, Runner, Library, Platform Guide, Settings
+- **Platform Guide** - Komplette Übersicht aller Social Media Specs
 - **Library Management** - Übersicht über Workflows und generierte Videos
-- **Settings Panel** - Konfiguration direkt im Browser
 
 ### 🔄 Workflow-System
 - **🔍 Automatische Link-Erkennung** - Sitemap.xml oder Homepage-Scraping
@@ -47,8 +50,21 @@ Ein professionelles, produktionsreifes System zum automatischen Erstellen von Sc
 - **Health Checks** - Systemüberwachung und Status-Checks
 - **Resource Management** - Konfigurierbare Limits und Caching
 
+### 📱 Social Media Platforms (NEU!)
+- **Instagram** - Feed (1:1), Story (9:16), Reel (9:16)
+- **Facebook** - Feed (16:9), Story (9:16)
+- **TikTok** - Vertical (9:16), max 3min
+- **YouTube** - Shorts (9:16), Videos (16:9)
+- **WhatsApp** - Status (9:16), max 30s
+- **LinkedIn** - Posts (16:9), max 10min
+- **Twitter/X** - Posts (16:9), max 2:20
+- **Pinterest** - Pins (9:16), max 60s
+- **Snapchat** - Snaps (9:16), max 60s
+- **Custom** - Beliebige Einstellungen
+
 ### 📚 Documentation
 - [README.md](README.md) - Hauptdokumentation (diese Datei)
+- [SOCIAL_MEDIA_GUIDE.md](SOCIAL_MEDIA_GUIDE.md) - **🆕 Social Media Platform Guide**
 - [WORKFLOW_GUIDE.md](WORKFLOW_GUIDE.md) - Workflow-System Details
 - [DEPLOYMENT.md](DEPLOYMENT.md) - Production Deployment Guide
 - [CODE_REVIEW.md](CODE_REVIEW.md) - Code-Review & Lizenz-Analyse
